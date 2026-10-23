@@ -29,7 +29,7 @@ The agent may say it saw no injection text: that is correct, because PARSE_CONTR
 never passes the free-text description to the model. The injected note never reaches Claude.
 
 If the Guardrail blocks the request instead, CoWork shows a blocked/refused message and no tools run. The proof
-query below still passes.
+query then reports `BLOCKED BY GUARDRAIL: no review ran, 0 approvals`.
 
 ## Message 2
 
