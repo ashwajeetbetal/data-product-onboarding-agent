@@ -19,7 +19,8 @@ def query(sql, params=None):
 
 def call(proc, *args):
     """CALL a governance procedure with bound arguments and return its VARIANT result as a dict."""
-    placeholders = ", ".join(["%s"] * len(args))
+    # The caller's-rights connection binds server-side (qmark), so placeholders are ?, not %s
+    placeholders = ", ".join(["?"] * len(args))
     cur = conn.cursor()
     try:
         cur.execute(f"CALL HACKATHON_DB.GOV.{proc}({placeholders})", args)
