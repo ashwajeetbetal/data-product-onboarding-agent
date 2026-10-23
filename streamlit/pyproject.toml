@@ -1,0 +1,10 @@
+[project]
+name = "approval-queue"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    # 1.53.1+ is required for restricted caller's rights connections
+    "streamlit>=1.53.1",
+    "snowflake-connector-python>=3.3.0",
+    "snowflake-snowpark-python",
+]

@@ -8,3 +8,4 @@ Created by `prework/01_setup.sql` and `prework/03_data_pack.sql`: HACKATHON_DB (
 ## Event work
 - Phase 1 grants and user defaults (`sql/01_event_additions.sql`): CORTEX_USER to GOV_ADMIN; CORTEX_AGENT_USER and USAGE on HACKATHON_DB, GOV and GOV_WH to GOV_DATA_OWNER; demo users USER (GOV_CONSUMER), USER2 (GOV_DATA_OWNER), USER3 (GOV_STEWARD), each also granted GOV_ADMIN, with DEFAULT_WAREHOUSE = GOV_WH and DEFAULT_SECONDARY_ROLES = ().
 - Phase 1–2 checks: `sql/01_02_checks.sql`.
+- Phase 8: PYPI_ACCESS_INTEGRATION (PyPI-only EAI on snowflake.external_access.pypi_rule) for the Streamlit container runtime; caller grants to GOV_ADMIN; USAGE on SYSTEM_COMPUTE_POOL_CPU to GOV_ADMIN.
