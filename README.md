@@ -109,9 +109,9 @@ and the public OAuth client ID from `sql/09_mcp.sql` (no client secret), then si
   0 approvals (`sql/11_injection_proof.sql`).
 - **C-LAB-DGR** (patient data declared as `domain: sales`): escalated to REGULATED_LAB, left BLOCKED.
 
-**Impact** (one end-to-end C-LAB-001 test run, including debugging pauses): 21.9 minutes from first parse to
-promotion, 5 human approvals by USER3, gaps STD-01, STD-02, LAB-01, LAB-04 caught. Re-run `sql/10_impact_query.sql`
-after a clean rehearsal for the demo number.
+**Impact** (end-to-end rehearsal, 14:51 to 15:08, `sql/10_impact_query.sql`): **17.0 minutes** from the data
+owner's first review to production, **5 human approvals**, all by the steward USER3, and 4 gaps caught (STD-01,
+STD-02, LAB-01, LAB-04) before the data reached PROD. The rehearsal included a C-LAB-INJ review in the same window.
 
 ## Built before vs today
 
