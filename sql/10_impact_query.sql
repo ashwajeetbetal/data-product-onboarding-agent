@@ -35,3 +35,4 @@ SELECT ts, details:scope::STRING AS scope, details:contracts::INT AS contracts,
        details:gap_precision::FLOAT AS gap_precision, details:errors::INT AS errors
 FROM HACKATHON_DB.GOV.AUDIT_LOG WHERE action = 'EVAL_RUN' ORDER BY ts DESC LIMIT 1;
 -- Rehearsal 15:10: 14:51:56 -> 15:08:54, 17.0 minutes, 5 approvals by USER3, gaps STD-01, STD-02, LAB-01, LAB-04.
+-- Clean dry run 15:41: 15:35:32 -> 15:38:57, 3.4 minutes, 5 approvals by USER3, gaps STD-01, STD-02, LAB-01, LAB-04.

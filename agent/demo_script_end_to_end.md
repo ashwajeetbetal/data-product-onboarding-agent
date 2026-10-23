@@ -3,6 +3,10 @@
 Three people, three screens, then CoCo checks the result and resets. Contracts are named by ID only; the agent
 reads the table from the contract itself. Start from `CALL HACKATHON_DB.GOV.RESET_DEMO();`.
 
+**Order matters:** finish all of Step 1 (both reviews) before the steward approves anything in Step 2.
+C-LAB-INJ covers the same table as C-LAB-001; once C-LAB-001's fixes are applied (mask, tag, LAB-B010
+quarantined), a C-LAB-INJ review correctly finds no gaps and returns READY (seen in the 15:39 dry run).
+
 ## Step 1: USER2 in CoWork (data owner)
 
 Open https://ai.snowflake.com, sign in as USER2 and pick the **Data Contract Governance** agent.
