@@ -34,3 +34,7 @@ DESCRIBE MCP SERVER HACKATHON_DB.GOV.GOVERNANCE_MCP;
 
 -- Server URL (hyphens, not underscores, in the account host):
 -- https://sfsehol-anthropic-snowflake-hackathon-pscsxl.snowflakecomputing.com/api/v2/databases/HACKATHON_DB/schemas/GOV/mcp-servers/GOVERNANCE_MCP
+
+-- Check result (14:40): C-LAB-001 submitted from Claude (custom connector, signed in as USER2) got REGULATED_LAB,
+-- gaps STD-01, STD-02, LAB-01, LAB-04, the LAB-B010 line and the same fixes as CoWork.
+CALL HACKATHON_DB.GOV.RESET_DEMO();
