@@ -45,7 +45,8 @@ st.subheader("Contracts")
 contracts = query("""
     SELECT contract_id, table_name, status
     FROM HACKATHON_DB.GOV.CONTRACTS
-    WHERE NOT is_test
+    -- Test contracts (for example C-LAB-INJ) get a card once a review has started
+    WHERE NOT is_test OR status <> 'SUBMITTED'
     ORDER BY contract_id
 """)
 cols = st.columns(max(len(contracts), 1))
