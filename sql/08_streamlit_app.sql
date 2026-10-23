@@ -40,3 +40,16 @@ SHOW STREAMLITS LIKE 'APPROVAL_QUEUE' IN ACCOUNT;
 -- Check: USER3 (default role GOV_STEWARD) approves one fix in the app; the audit row shows USER3
 SELECT ts, actor, action, fix_id, details:role::STRING AS role
 FROM HACKATHON_DB.GOV.AUDIT_LOG WHERE action = 'APPROVE_FIX' ORDER BY audit_id DESC LIMIT 5;
+
+-- Fix (13:20): a pyproject.toml added to the stage after deploy made the container resolve packages on PyPI,
+-- which fails without an external access integration. The app uses only pre-installed packages, so remove it
+-- and recreate the app from the clean stage (CREATE OR REPLACE drops grants: re-grant USAGE).
+REMOVE @HACKATHON_DB.GOV.APP_STAGE/approval_queue/pyproject.toml;
+CREATE OR REPLACE STREAMLIT HACKATHON_DB.GOV.APPROVAL_QUEUE
+  FROM '@HACKATHON_DB.GOV.APP_STAGE/approval_queue'
+  MAIN_FILE = 'streamlit_app.py'
+  QUERY_WAREHOUSE = GOV_WH
+  RUNTIME_NAME = 'SYSTEM$ST_CONTAINER_RUNTIME_PY3_11'
+  COMPUTE_POOL = SYSTEM_COMPUTE_POOL_CPU
+  TITLE = 'Steward approval queue';
+GRANT USAGE ON STREAMLIT HACKATHON_DB.GOV.APPROVAL_QUEUE TO ROLE GOV_STEWARD;
