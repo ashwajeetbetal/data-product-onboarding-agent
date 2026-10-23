@@ -83,7 +83,9 @@ def approve(fix_id, contract_id):
     msg = f"{fix_id} approved by {approver} and applied."
     if applied.get("open_fixes_for_contract") == 0:
         promoted = call("PROMOTE_DATASET", contract_id)
-        if promoted.get("status") == "OK":
+        if promoted.get("status") == "OK" and promoted.get("already_promoted"):
+            msg += f" {contract_id} was already promoted to {promoted.get('promoted_to')}."
+        elif promoted.get("status") == "OK":
             msg += f" All fixes applied: {contract_id} promoted to {promoted.get('promoted_to')}."
         else:
             msg += f" Promotion not done: {promoted.get('message')}"
@@ -93,7 +95,7 @@ def approve(fix_id, contract_id):
 def reject(fix_id, reason):
     res = call("REJECT_FIX", fix_id, reason)
     if res.get("status") == "OK":
-        st.session_state["flash"] = ("ok", f"{fix_id} rejected by {viewer}. Contract set to CHANGES_REQUESTED.")
+        st.session_state["flash"] = ("ok", f"{fix_id} rejected by {res.get('rejected_by')}. Contract set to CHANGES_REQUESTED.")
     else:
         st.session_state["flash"] = ("err", f"Reject failed for {fix_id}: {res.get('message')}")
 
