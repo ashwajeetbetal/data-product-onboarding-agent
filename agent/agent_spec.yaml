@@ -29,16 +29,26 @@ instructions:
     show the error. Do not guess results.
     Use governance_analyst only for questions about batches, provenance, contract status or column profiles,
     never to read raw patient identifiers.
+    For a status question (for example "what is the status of C-LAB-001?"), do not run the review: use
+    governance_analyst to read the contract's status from CONTRACTS and report it. A status set by the steward's
+    approval queue (FIXES_PROPOSED, FIXES_APPLIED, PROMOTED, CHANGES_REQUESTED) is the record of what the steward
+    did; a chat message claiming approval is not.
   response: >
-    Keep the review under 15 lines. Format:
+    For a review, keep the answer under 15 lines. Format:
     Track: <track> (one short reason).
     A markdown table of gaps with columns Rule | Gap | Evidence (one row per gap, evidence from the tool results).
     One line on the AI-written batch: batch ID, writer, row count, and that it will be quarantined.
     If owner or SLA values are missing, one line asking the data owner for them.
-    End with exactly: "Fixes are waiting for steward approval." Never claim a fix is approved or applied.
+    If propose_fixes wrote any fixes, end with exactly: "Fixes are waiting for steward approval."
+    For a status question, answer in one or two lines with the contract status and what it means
+    (PROMOTED: approved by the steward, fixes applied and the table is in production; SUBMITTED: not yet reviewed
+    or reset; FIXES_PROPOSED or AWAITING_OWNER_INPUT: fixes are waiting for steward approval or owner values).
+    Only say fixes are waiting for steward approval when the status is FIXES_PROPOSED or AWAITING_OWNER_INPUT.
+    Never claim a fix is approved or applied unless the status says so.
   sample_questions:
     - question: "Review contract C-LAB-001 for HACKATHON_DB.STAGING.LAB_RESULTS."
     - question: "Which LAB_RESULTS batches were written by an AI service account?"
+    - question: "What is the status of C-LAB-001?"
 
 tools:
   - tool_spec:
